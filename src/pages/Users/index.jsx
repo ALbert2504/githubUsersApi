@@ -26,20 +26,24 @@ class Users extends Component {
       avatarUrl: '',
       url: '',
       type: '',
-    }
+    },
   };
 
   componentDidMount() {
+    //get users from API
     const {getUsers} = this.usersApi;
 
     getUsers().then((res) => {
-      this.setState((prevState) => {
+      this.setState(prevState => {
         return {
+          ...prevState,
           users: res
         };
       });
     });
   };
+
+
 
   handleUserDelete = (id) => {
     const {users} = this.state;
@@ -55,6 +59,8 @@ class Users extends Component {
     this.setState({
       newUser: {...this.state.newUser, [prop]: value}
     });
+
+    console.log(this.state);
   };
 
   handleAddSubmit = (e, modalClose, modalCloseState) => {
@@ -65,7 +71,59 @@ class Users extends Component {
       users: [newAddedUser, ...this.state.users]
     });
 
-    modalClose(modalCloseState)
+    modalClose(modalCloseState);
+
+  };
+
+
+  handleEditStart = (id) => {
+    const {users} = this.state;
+    const newUsers = users.map((user) => {
+      return {
+        ...user,
+        isEditing: user.id === id
+      };
+    });
+
+    this.setState({
+      users: newUsers
+    })
+
+  };
+
+  handleEdit = (id, prop, value) => {
+    const {users} = this.state;
+    const newUsers = users.map((user) => {
+      if(user.id === id) {
+        return {
+          ...user,
+          [prop]: value
+        };
+      } else {
+        return user;
+      }
+    });
+
+
+    this.setState({
+      users: newUsers
+    });
+
+
+  };
+
+  handleEditSubmit = () => {
+    const {users} = this.state;
+    const newUsers = users.map((user) => {
+      return {
+        ...user,
+        isEditing: false
+      };
+    });
+
+    this.setState({
+      users: newUsers
+    });
 
   };
 
@@ -99,19 +157,25 @@ class Users extends Component {
                       avatarUrl={user.avatarUrl}
                       type={user.type}
                       profileUrl={user.url}
+                      isEditing={user.isEditing}
 
                       onDelete={this.handleUserDelete}
+                      onEditStart={this.handleEditStart}
+                      onEdit={this.handleEdit}
+                      onEditSubmit={this.handleEditSubmit}
                     />
 
                   );
                 })
               }
+
+
             </div>
           </div>
         </Wrapper>
       </div>
     );
-  }
+  };
 }
 
 export default Users;

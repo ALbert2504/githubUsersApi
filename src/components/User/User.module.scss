@@ -16,6 +16,28 @@
     box-shadow: 0 0 25px 10px #000;
   }
 
+  &__avatarEdit {
+    height: 250px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      width: 95%;
+      padding: 6px 10px;
+      border: solid 1px transparent;
+      background-color: #eee;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: box-shadow .3s ease-in-out, border-color .4s ease-in-out;
+
+      &:focus {
+        box-shadow: 0px 0px 10px 2px skyblue;
+        border-color: skyblue;
+      }
+    }
+  }
 
   &__img {
     height: 250px;
@@ -41,6 +63,25 @@
     &_type {
       font-size: 14px;
       margin-top: 5px;
+    }
+
+    &_edit {
+      width: 100%;
+      padding: 2px;
+      border: solid 1px transparent;
+      background-color: #eee;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: box-shadow .3s ease-in-out, border-color .4s ease-in-out;
+
+      &:first-of-type {
+        margin-bottom: 2px;
+      }
+
+      &:focus {
+        box-shadow: 0px 0px 10px 2px skyblue;
+        border-color: skyblue;
+      }
     }
 
     &_manipulation {

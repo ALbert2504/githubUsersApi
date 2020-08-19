@@ -11,6 +11,9 @@ import Navigation from "./Navigation";
 
 class Header extends Component {
   render() {
+
+    const {onSearch} = this.props;
+
     return (
       <header className={styles.header}>
         <Wrapper>
@@ -20,6 +23,7 @@ class Header extends Component {
             </h1>
             <Navigation />
             <input
+              onChange={(e) => onSearch(e.target.value)}
               type="text"
               name="search"
               className={styles.header__search}

@@ -21,6 +21,7 @@ class UsersApi {
       avatarUrl: person.avatar_url,
       url: person.html_url,
       type: person.type,
+      isEditing: false
     };
   }
 }
